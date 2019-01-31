@@ -1,6 +1,14 @@
 <?php
 
-return array(
-    'news' => 'test/index',
-    'products' => 'products/list'
-);
+return [
+    'login' => 'admin/login',
+    'auth' => 'admin/auth',
+    'logout' => 'admin/logout',
+    'task/new' => 'task/new',
+    'task/store' => 'task/store',
+    'task/edit/([0-9]+)' => 'task/edit/$1',
+    'task/save/([0-9]+)' => 'task/save/$1',
+
+    'task/list/([0-9]+)' => 'task/list/$1',
+    '' => 'task/list',
+];

@@ -7,8 +7,8 @@
  */
 
 return array(
-    "host" => "",
-    "dbname" => "",
-    "user" => "",
+    "host" => "127.0.0.1:3306",
+    "dbname" => "tasks",
+    "user" => "root",
     "password" => ""
 );

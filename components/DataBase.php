@@ -18,7 +18,7 @@ class DataBase
 
         $dsn = "mysql:host={$params['host']}; dbname={$params['dbname']}";
 
-        $connection = new PDO($dsn, $params['user'], $params['password']);
+        $connection = new \PDO($dsn, $params['user'], $params['password']);
 
         return $connection;
     }
