@@ -12,3 +12,4 @@ table.dataTable thead .sorting_desc_disabled:before {
 }
 
 #dtBasicExample_length {display: none}
+#dtBasicExample_info, #dtBasicExample_paginate {display: none}

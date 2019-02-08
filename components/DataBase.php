@@ -16,9 +16,13 @@ class DataBase
     {
         $params = include(self::PARAMS_PATH);
 
+        $options = [
+            \PDO::ATTR_EMULATE_PREPARES => false
+        ];
+
         $dsn = "mysql:host={$params['host']}; dbname={$params['dbname']}";
 
-        $connection = new \PDO($dsn, $params['user'], $params['password']);
+        $connection = new \PDO($dsn, $params['user'], $params['password'], $options);
 
         return $connection;
     }

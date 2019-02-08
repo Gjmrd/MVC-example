@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gm
- * Date: 31.01.2019
- * Time: 11:02
- */
+
 
 namespace repository;
 
 use Components\DataBase;
+
 
 class TaskRepository
 {
@@ -26,7 +22,7 @@ class TaskRepository
          return $query->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function selectWithPagination($limit, $page)
+    public function selectWithPagination($limit, $page, $sortBy)
     {
         $query = $this->db->prepare("select * from tasks");
         $query->execute();
@@ -35,9 +31,15 @@ class TaskRepository
         $totalPages = ceil($totalResults/$limit);
 
         $startingLimit = ($page - 1)*$limit;
-        $query = $this->db->prepare("select * from tasks  LIMIT $startingLimit, $limit");
-        $query->execute();
 
+
+        $query = $this->db->prepare("select * from tasks order by :sortBy limit :startingLimit, :pageLimit");
+
+        $query->execute([
+            'sortBy' => $sortBy,
+            'startingLimit' => $startingLimit,
+            'pageLimit' => $limit
+        ]);
 
         $result = [];
         while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -52,11 +54,12 @@ class TaskRepository
         ];
     }
 
-    public function create($caption, $description, $status)
+    public function create($username, $email, $description, $status)
     {
-        $query = $this->db->prepare("insert into tasks(caption, description, status) values (:caption, :description, :status)");
+        $query = $this->db->prepare("insert into tasks(username, email, description, status) values (:username, :email, :description, :status)");
         $query->execute([
-            'caption' => $caption,
+            'username' => $username,
+            'email' => $email,
             'description' => $description,
             'status' => (int)$status
         ]);

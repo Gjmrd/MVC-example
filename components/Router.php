@@ -1,10 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Gm
- * Date: 29.01.2019
- * Time: 19:52
- */
+
+
 
 class Router
 {
@@ -25,16 +21,19 @@ class Router
 
     }
 
+
+
+    /**
+     * defines what controller and action should be called
+     */
     public function run()
     {
         $uri = $this->getRequestUri();
 
         //checking routes
-
         foreach ($this->routes as $uriPattern => $path) {
-            if (preg_match("~$uriPattern~", $uri)) {
 
-                //$internalRoute = $path;
+            if (preg_match("~$uriPattern~", $uri)) {
 
                 $internalRoute = preg_replace("~$uriPattern~", $path ,$uri);
 
@@ -42,12 +41,11 @@ class Router
 
                 $controllerName = ucfirst(array_shift($segments)."Controller");
                 $actionName = array_shift($segments);
-
                 $parameters = $segments;
 
                 $controller = "Controllers\\" . $controllerName;
-
                 $controllerObject = new $controller;
+
                 $result = call_user_func_array([$controllerObject, $actionName], $parameters);
 
                 if ($result != null) {

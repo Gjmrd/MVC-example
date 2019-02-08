@@ -8,7 +8,6 @@ ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
 
-
 //starting session
 session_start();
 
@@ -21,9 +20,6 @@ require_once(ROOT."/components/Router.php");
 
 //enabling autoload
 require __DIR__ . '/vendor/autoload.php';
-
-
-
 
 
 
