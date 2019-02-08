@@ -37,8 +37,8 @@ class TaskRepository
 
         $query->execute([
             'sortBy' => $sortBy,
-            'startingLimit' => $startingLimit,
-            'pageLimit' => $limit
+            'startingLimit' => (int)$startingLimit,
+            'pageLimit' => (int)$limit
         ]);
 
         $result = [];
@@ -69,7 +69,7 @@ class TaskRepository
     {
         $query = $this->db->prepare("update tasks set description = :description, status = :status where id = :id");
         $query->execute([
-            'id' => $id,
+            'id' => (int)$id,
             'description' => $description,
             'status' => (int)$status
         ]);
